@@ -25,3 +25,14 @@ A Python-based desktop application with a GUI (Tkinter) that allows sellers to m
   - ReportLab (for PDF reports)
 
 ## 🖼️ Screenshots
+| Main Screen | Sign Up Screen |Login Screen|
+| ----------- | -------------- | ------------ |
+| ![Main Screen](https://github.com/Mohammad-Mans/Listify/blob/main/main.png?raw=true) | ![Sign Up Screen](https://github.com/Mohammad-Mans/Listify/blob/main/signup.png?raw=true) | ![Login Screen](https://github.com/Mohammad-Mans/Listify/blob/main/login.png?raw=true) |
+
+| Home Screen |
+| ------------ |
+| ![Home Screen](https://github.com/Mohammad-Mans/Listify/blob/main/homescreen.png?raw=true) |
+
+| Add Product Screen | Add Screen |
+| ------------------ | ---------- |
+| ![Add Product Screen](https://github.com/Mohammad-Mans/Listify/blob/main/addproduct.png?raw=true) | ![Add Screen](https://github.com/Mohammad-Mans/Listify/blob/main/add.png?raw=true) | 
