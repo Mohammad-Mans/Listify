@@ -19,8 +19,8 @@ def initialize_connection():
     return mydb , cursor
 
 def create_database(cursor):
-    cursor.execute("CREATE DATABASE if not exists tutorial")
-    cursor.execute("USE tutorial")
+    cursor.execute("CREATE DATABASE if not exists listify")
+    cursor.execute("USE listify")
 
 def create_tables(cursor):
     cursor.execute("SHOW TABLES")
