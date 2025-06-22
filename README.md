@@ -24,6 +24,41 @@ A Python-based desktop application with a GUI (Tkinter) that allows sellers to m
   - bcrypt (for password hashing)
   - ReportLab (for PDF reports)
 
+## ▶️ How to Use the App
+
+1. **Set Up the Database Connection**
+
+   Before running the app, update the MySQL password in the `database.py` file:
+
+   ```python
+   def initialize_connection():
+       mydb = mysql.connector.connect(
+           host = "localhost",
+           user = "root",
+           password = "your_mysql_password"  # ← Replace this line
+       )
+       cursor = mydb.cursor()
+       create_database(cursor)
+       create_tables(cursor)
+       return mydb, cursor
+   ```
+
+2. **Run the Application**
+
+   Launch the main Python script (e.g., `main.py`) to start the app.
+
+3. **Register a New User**
+
+   - On the login screen, click on **Sign Up**.
+   - Fill in your credentials and create your account.
+
+4. **Start Managing Your Inventory**
+
+   - After logging in, access the **Home Screen**.
+   - Use the **Add Product** button to insert new items.
+   - Adjust quantities or delete products as needed.
+   - Export your product list to PDF when desired.
+
 ## 🖼️ Screenshots
 | Main Screen | Sign Up Screen |Login Screen|
 | ----------- | -------------- | ------------ |
