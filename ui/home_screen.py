@@ -60,7 +60,6 @@ class HomeWindow(tk.Frame):
             frame = tk.Frame(self.container, bg="white", bd=2, relief="groove", padx=10, pady=10)
             self.product_frames.append(frame)
 
-            # Load Image
             try:
                 img = Image.open(product["image"])
                 img = img.resize((130, 130))

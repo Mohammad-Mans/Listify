@@ -168,21 +168,17 @@ def generate_report_pdf(mydb, cursor, file_path="product_report.pdf"):
     c = canvas.Canvas(file_path, pagesize=A4)
     width, height = A4
 
-    # Title
     c.setFont("Helvetica-Bold", 16)
     c.drawString(50, height - 50, f"{seller_name} - Product Report")
 
-    # Date
     c.setFont("Helvetica", 10)
     c.drawString(50, height - 70, f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
-    # Table header
     c.setFont("Helvetica-Bold", 12)
     c.drawString(50, height - 100, "Product Name")
     c.drawString(250, height - 100, "Price")
     c.drawString(350, height - 100, "Quantity")
 
-    # Table content
     y = height - 120
     c.setFont("Helvetica", 11)
     for name, price, quantity in products:
