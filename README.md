@@ -45,7 +45,7 @@ A Python-based desktop application with a GUI (Tkinter) that allows sellers to m
 
 2. **Run the Application**
 
-   Launch the main Python script (e.g., `main.py`) to start the app.
+   Launch the main Python script (`main.py`) to start the app.
 
 3. **Register a New User**
 
