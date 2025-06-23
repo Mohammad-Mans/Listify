@@ -26,7 +26,16 @@ A Python-based desktop application with a GUI (Tkinter) that allows sellers to m
 
 ## ▶️ How to Use the App
 
-1. **Set Up the Database Connection**
+1. **Install Required Libraries**
+
+   Make sure to install the following Python libraries before running the app:
+
+   ```bash
+   pip install bcrypt
+   pip install reportlab
+   ```
+
+2. **Set Up the Database Connection**
 
    Before running the app, update the MySQL password in the `database.py` file:
 
@@ -43,16 +52,16 @@ A Python-based desktop application with a GUI (Tkinter) that allows sellers to m
        return mydb, cursor
    ```
 
-2. **Run the Application**
+3. **Run the Application**
 
    Launch the main Python script (`main.py`) to start the app.
 
-3. **Register a New User**
+4. **Register a New User**
 
    - On the login screen, click on **Sign Up**.
    - Fill in your credentials and create your account.
 
-4. **Start Managing Your Inventory**
+5. **Start Managing Your Inventory**
 
    - After logging in, access the **Home Screen**.
    - Use the **Add Product** button to insert new items.
