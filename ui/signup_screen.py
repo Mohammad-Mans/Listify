@@ -13,28 +13,37 @@ class RegisterWindow(tk.Frame):
 
         tk.Label(self, text="Signup", font=("Arial", 24, "bold"), bg="#d8c4ba").pack(pady=20)
 
-        self.create_field("Username:", "username")
-        self.create_field("Store Name:", "store_name")
-        self.create_field("Phone:", "phone")
-        self.create_field("Password:", "password", show="*")
-        self.create_field("Password again:", "confirm_password", show="*")
+        tk.Label(self, text="Username:", bg="#d8c4ba").pack(pady=5)
+        self.username = tk.Entry(self, width=40)
+        self.username.pack()
+
+        tk.Label(self, text="Store Name:", bg="#d8c4ba").pack(pady=5)
+        self.store_name = tk.Entry(self, width=40)
+        self.store_name.pack()
+
+        tk.Label(self, text="Phone:", bg="#d8c4ba").pack(pady=5)
+        self.phone = tk.Entry(self, width=40)
+        self.phone.pack()
+
+        tk.Label(self, text="Password:", bg="#d8c4ba").pack(pady=5)
+        self.password = tk.Entry(self, width=40, show="*")
+        self.password.pack()
+
+        tk.Label(self, text="Password again:", bg="#d8c4ba").pack(pady=5)
+        self.confirm_password = tk.Entry(self, width=40, show="*")
+        self.confirm_password.pack()
 
         tk.Button(self, text="Signup", bg="#c5a491", width=20, height=2, command=self.register_user).pack(pady=20)
         tk.Button(self, text="Go Back", bg="gray", width=10, command=self.on_back).pack()
+
         self.pack(fill='both', expand=True)
 
-    def create_field(self, label_text, attr_name, show=None):
-        tk.Label(self, text=label_text, bg="#d8c4ba").pack(pady=5)
-        entry = tk.Entry(self, width=40, show=show) if show else tk.Entry(self, width=40)
-        entry.pack()
-        setattr(self, f"{attr_name}_entry", entry)
-
     def register_user(self):
-        username = self.username_entry.get()
-        storeName = storeName = self.store_name_entry.get()
-        phone = self.phone_entry.get()
-        password = self.password_entry.get()
-        confirm_password = self.confirm_password_entry.get()
+        username = self.username.get()
+        storeName = self.store_name.get()
+        phone = self.phone.get()
+        password = self.password.get()
+        confirm_password = self.confirm_password.get()
 
         if password != confirm_password:
             messagebox.showerror("Error", "Passwords do not match!")

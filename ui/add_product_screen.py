@@ -2,61 +2,68 @@ import tkinter as tk
 from tkinter import messagebox, filedialog
 from PIL import Image, ImageTk
 from database import add_product
+from .shared import center_window
 from .home_screen import HomeWindow  
 
-def add_product_screen(root, mydb, cursor):
-    for widget in root.winfo_children():
-        widget.destroy()
+class AddProductWindow(tk.Frame):
+    def __init__(self, master, mydb, cursor):
+        super().__init__(master, bg="#d8c4ba")
+        self.master = master
+        self.mydb = mydb
+        self.cursor = cursor
+        self.master.title("Add New Product")
+        center_window(master, 400, 600)
 
-    root.title("Add New Product")
-    root.geometry("400x550")
-    root.configure(bg="#d8c4ba")
+        tk.Label(self, text="Add Product", font=("Arial", 18, "bold"), bg="#d8c4ba").pack(pady=20)
 
-    tk.Label(root, text="Add Product", font=("Arial", 18, "bold"), bg="#d8c4ba").pack(pady=20)
+        tk.Label(self, text="Product Name:", bg="#d8c4ba").pack()
+        self.name = tk.Entry(self, width=30)
+        self.name.pack()
 
-    tk.Label(root, text="Product Name:", bg="#d8c4ba").pack()
-    entry_name = tk.Entry(root, width=30)
-    entry_name.pack()
+        tk.Label(self, text="Price:", bg="#d8c4ba").pack()
+        self.price = tk.Entry(self, width=30)
+        self.price.pack()
 
-    tk.Label(root, text="Price:", bg="#d8c4ba").pack()
-    entry_price = tk.Entry(root, width=30)
-    entry_price.pack()
+        tk.Label(self, text="Quantity:", bg="#d8c4ba").pack()
+        self.quantity = tk.Entry(self, width=30)
+        self.quantity.pack()
 
-    tk.Label(root, text="Quantity:", bg="#d8c4ba").pack()
-    entry_quantity = tk.Entry(root, width=30)
-    entry_quantity.pack()
+        tk.Label(self, text="Product Image:", bg="#d8c4ba").pack(pady=(10, 0))
+        self.image = tk.Entry(self, width=30)
+        self.image.pack()
 
-    tk.Label(root, text="Product Image:", bg="#d8c4ba").pack(pady=(10, 0))
-    entry_image = tk.Entry(root, width=30)
-    entry_image.pack()
+        self.img_label = tk.Label(self, bg="#d8c4ba")
+        self.img_label.pack(pady=10)
 
-    img_label = tk.Label(root, bg="#d8c4ba")
-    img_label.pack(pady=10)
+        tk.Button(self, text="Choose Image from Device", command=self.choose_image, width=25).pack()
 
-    def choose_image():
+        tk.Button(self, text="Save Product", bg="#4caf50", fg="white", width=20, height=2, command=self.save_product).pack(pady=15)
+        tk.Button(self, text="Back", bg="#c5a491", width=20, height=2, command=self.go_back).pack()
+
+        self.pack(fill='both', expand=True)
+
+    def choose_image(self):
         filepath = filedialog.askopenfilename(
             title="Select Product Image",
             filetypes=[("Image files", "*.jpg *.jpeg *.png *.gif *.bmp")]
         )
         if filepath:
-            entry_image.delete(0, tk.END)
-            entry_image.insert(0, filepath)
+            self.image.delete(0, tk.END)
+            self.image.insert(0, filepath)
             try:
                 img = Image.open(filepath)
                 img = img.resize((150, 150))
                 photo = ImageTk.PhotoImage(img)
-                img_label.config(image=photo)
-                img_label.image = photo
+                self.img_label.config(image=photo)
+                self.img_label.image = photo
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to load image:\n{e}")
 
-    tk.Button(root, text="Choose Image from Device", command=choose_image, width=25).pack()
-
-    def save_product():
-        name = entry_name.get().strip()
-        price = entry_price.get().strip()
-        image = entry_image.get().strip()
-        quantity = entry_quantity.get().strip()
+    def save_product(self):
+        name = self.name.get()
+        price = self.price.get()
+        image = self.image.get()
+        quantity = self.quantity.get()
 
         if not (name and price and image and quantity):
             messagebox.showwarning("Warning", "Please fill in all fields")
@@ -72,20 +79,13 @@ def add_product_screen(root, mydb, cursor):
             return
 
         try:
-            add_product(mydb, cursor, name, price, image, quantity)
+            add_product(self.mydb, self.cursor, name, price, image, quantity)
             messagebox.showinfo("Success", "Product added successfully!")
-            for widget in root.winfo_children():
-                widget.destroy()
-            HomeWindow(root, mydb, cursor)
+            self.destroy()
+            HomeWindow(self.master, self.mydb, self.cursor)
         except Exception as e:
             messagebox.showerror("Error", f"Failed to save product:\n{e}")
-            
-    def go_back():
-        for widget in root.winfo_children():
-            widget.destroy()
-        HomeWindow(root, mydb, cursor)
 
-
-    tk.Button(root, text="Save Product", bg="#4caf50", fg="white", width=20, height=2, command=save_product).pack(pady=15)
-    tk.Button(root, text="Back", bg="#c5a491", width=20, height=2, command=go_back).pack()
-
+    def go_back(self):
+        self.destroy()
+        HomeWindow(self.master, self.mydb, self.cursor)

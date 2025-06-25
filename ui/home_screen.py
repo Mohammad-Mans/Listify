@@ -2,6 +2,7 @@ import os
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
+from .shared import center_window
 import database
 from database import (
     logout,
@@ -21,11 +22,8 @@ class HomeWindow(tk.Frame):
         self.user = database.current_seller
         self.pack(fill="both", expand=True)
         self.master.title("Home Screen")
-        self.master.geometry("800x600")
+        center_window(master, 800, 600)
 
-        self.create_ui()
-
-    def create_ui(self):
         tk.Label(self, text=self.user["store_name"], font=("Arial", 22, "bold"), bg="#d8c4ba").pack(pady=10)
 
         top_buttons = tk.Frame(self, bg="#d8c4ba")
@@ -103,9 +101,9 @@ class HomeWindow(tk.Frame):
             self.refresh_products()
 
     def insert_product(self):
-        from .add_product_screen import add_product_screen
+        from .add_product_screen import AddProductWindow
         self.destroy()
-        add_product_screen(self.master, self.mydb, self.cursor)
+        AddProductWindow(self.master, self.mydb, self.cursor)
 
     def show_report(self):
         try:
